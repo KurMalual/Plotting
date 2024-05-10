@@ -1,0 +1,189 @@
+Project Plotting - Matplotlib Seaborn, Histograms and Boxplots
+The most recent ASC23 considered four major systems-based tracks with a view to providing region-focused contributions to inform the global stocktake among them Cities, urban and rural settlements, infrastructure, and transport.
+
+In this assignment, you will be performing analysis more specifically on transport (vehicles and fuel efficiency).
+
+The dataset has been provided for you.
+
+You are tasked to make sense of this data that will later be used for AI purposes.
+
+[ ]
+# prerequisite package imports
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+
+#YOUR CODE
+
+
+:We'll work with the fuel economy dataset in this workspace.
+
+Load the dataset and print at least 10 rows
+
+Load the dataset
+print atleast 10 rows of it
+[ ]
+'''
+These lines prints first ten rows of the whole dataset using pandas
+'''
+
+df = pd.read_csv('fuel_econ.csv')
+
+print(df.head(10))
+
+      id        make           model  year           VClass  \
+0  32204      Nissan            GT-R  2013  Subcompact Cars   
+1  32205  Volkswagen              CC  2013     Compact Cars   
+2  32206  Volkswagen              CC  2013     Compact Cars   
+3  32207  Volkswagen      CC 4motion  2013     Compact Cars   
+4  32208   Chevrolet  Malibu eAssist  2013     Midsize Cars   
+5  32209       Lexus          GS 350  2013     Midsize Cars   
+6  32210       Lexus      GS 350 AWD  2013     Midsize Cars   
+7  32214     Hyundai   Genesis Coupe  2013  Subcompact Cars   
+8  32215     Hyundai   Genesis Coupe  2013  Subcompact Cars   
+9  32216     Hyundai   Genesis Coupe  2013  Subcompact Cars   
+
+               drive              trans          fuelType  cylinders  displ  \
+0    All-Wheel Drive    Automatic (AM6)  Premium Gasoline          6    3.8   
+1  Front-Wheel Drive  Automatic (AM-S6)  Premium Gasoline          4    2.0   
+2  Front-Wheel Drive     Automatic (S6)  Premium Gasoline          6    3.6   
+3    All-Wheel Drive     Automatic (S6)  Premium Gasoline          6    3.6   
+4  Front-Wheel Drive     Automatic (S6)  Regular Gasoline          4    2.4   
+5   Rear-Wheel Drive     Automatic (S6)  Premium Gasoline          6    3.5   
+6    All-Wheel Drive     Automatic (S6)  Premium Gasoline          6    3.5   
+7   Rear-Wheel Drive    Automatic 8-spd  Premium Gasoline          4    2.0   
+8   Rear-Wheel Drive       Manual 6-spd  Premium Gasoline          4    2.0   
+9   Rear-Wheel Drive    Automatic 8-spd  Premium Gasoline          6    3.8   
+
+   pv2  pv4     city    UCity  highway  UHighway     comb  co2  feScore  \
+0   79    0  16.4596  20.2988  22.5568   30.1798  18.7389  471        4   
+1   94    0  21.8706  26.9770  31.0367   42.4936  25.2227  349        6   
+2   94    0  17.4935  21.2000  26.5716   35.1000  20.6716  429        5   
+3   94    0  16.9415  20.5000  25.2190   33.5000  19.8774  446        5   
+4    0   95  24.7726  31.9796  35.5340   51.8816  28.6813  310        8   
+5    0   99  19.4325  24.1499  28.2234   38.5000  22.6002  393        6   
+6    0   99  18.5752  23.5261  26.3573   36.2109  21.4213  412        5   
+7   89    0  17.4460  21.7946  26.6295   37.6731  20.6507  432        5   
+8   89    0  20.6741  26.2000  29.2741   41.8000  23.8235  375        6   
+9   89    0  16.4675  20.4839  24.5605   34.4972  19.3344  461        4   
+
+   ghgScore  
+0         4  
+1         6  
+2         5  
+3         5  
+4         8  
+5         6  
+6         5  
+7         5  
+8         6  
+9         4  
+[ ]
+
+Play Around with Bin size as you create your Histogram
+
+Bin size in Matplot Lib
+
+image.png
+
+Description The dataset has a number of different statistics that describe fuel efficiency.
+
+TO DO:
+
+create a histogram that depicts the distribution of carbon Dioxide
+Play around with different bin width sizes to see what best depicts the data
+Create 2 more histograms based on columns of your choice
+
+[ ]
+'''
+This block of code extracts the Carbon dioxide emission column
+from the the dataset and visualise it
+with a histogram
+
+'''
+Co2_emission = df['co2']
+sns.set(style="whitegrid")
+
+sns.histplot(Co2_emission, bins=20, color='orange', edgecolor='black')
+plt.xlabel('CO2 Emissions')
+plt.ylabel('Frequency')
+plt.title('Distribution of Carbon Dioxide Emissions')
+plt.show()
+print(Co2_emission.head(10))
+
+
+Interpretation : The histogram shows how much carbon dioxide cars release. Most cars release between 250 and 450 grams of CO2 for every mile they drive(Not really sure about the units). There are only a few cars that release more or less than that. the x-axis has Co2 emission and y-axis has frequency
+
+Double-click (or enter) to edit
+
+[ ]
+'''
+This block of code extracts the Engine Displacement column
+from the the dataset and visualise it
+with a histogram
+
+'''
+Displacement = df['displ']
+sns.set(style="whitegrid")
+sns.histplot(data=df, x='displ', color='skyblue', edgecolor='black', bins=20)
+plt.xlabel('Engine Displacement')
+plt.ylabel('Frequency')
+plt.title('Distribution of Engine Displacement')
+plt.show()
+print(Displacement.head(10))
+
+[ ]
+
+Interpretation : The engine size histogram shows how many vehicles have different engine sizes. Most vehicles have common engine sizes, with only a few having very small or very big engines. The y-axis is frequency while x-axis is engine displacement
+
+[ ]
+
+'''
+This block of code extracts the combined fuel efficient column
+from the the dataset and visualise it
+with a histogram
+
+'''
+Combfuel= df['comb']
+sns.histplot(data=df, x='comb', color='green', edgecolor='black', bins=20)
+plt.xlabel('Combined Fuel Efficiency')
+plt.ylabel('Frequency')
+plt.title('Distribution of Combined Fuel Efficiency')
+plt.show()
+print(Combfuel.head(10))
+
+Double-click (or enter) to edit
+
+Interpretation : The combined fuel efficiency histogram shows how efficient vehicles are in using fuel. Many vehicles have high efficiency ratings. The x-axis depitcts fuel efficiency while frequency is on the y-axis
+
+TO DO: Write Code that will give you the following plot as below:
+
+create a heat map of the data
+Interpret the data - What story does the visualization tell?
+Finally What Columns would you delete Drop if the target is the ghg score? Justify your Answer
+
+image.png
+
+Double-click (or enter) to edit
+
+[ ]
+'''
+The block extract all numerical columns and make a correlation heatmap with the extracted column
+'''
+numbercolumns = df.select_dtypes(include=['number'])
+
+corr_matrix = numbercolumns.corr()
+
+# Create a heatmap
+plt.figure(figsize=(9, 6))
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Correlation Heatmap of Fuel Economy Data')
+
+plt.show()
+
+Double-click (or enter) to edit
+
+Interpretation: The heatmap demonstrates strong positive correlations between certain features, such as Urban fuel economy (Ucity) and Highway fuel economy (UHighway), which is expected since they influence each other. Similarly, there is a correlation between city and Ucity. Another notable observation from the heatmap is that combined fuel and greenhouse gas scores positively correlate because higher fuel consumption tends to lead to increased greenhouse gas emissions.
+
+Columns to Remove: When focusing on ghgScore as the target, there are certain columns that are either irrelevant or have minimal impact on ghgScore. These include "id" and "year," which serve merely as identifiers and dropping them wouldn't result in any loss of data related to ghgScore. Additionally, "Displacement" and "Cylinders" exhibit very weak negative correlations with ghgScore, hence they are unnecessary. Essentially, columns with negative correlations or those that are irrelevant should be eliminated to ensure a clearer observation of ghgScore.
